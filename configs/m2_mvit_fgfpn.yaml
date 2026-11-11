@@ -1,0 +1,12 @@
+_base_: _base_.yaml
+
+model:
+  name: m2_mvit_fgfpn
+  backbone: {name: mobilevit, variant: xs, pretrained: true}
+  neck: {name: fgfpn, fuse_conv: pairwise_cross, out_conv: false}
+  levels: [4, 8, 16, 32]   # H-A default: L2..L5
+  num_classes: 4
+
+# S4-C: as in M1, make warmup explicit; proportional scaling gives about 625 iterations at batch size 8.
+schedule:
+  warmup_iters: 625

@@ -1,0 +1,32 @@
+task: detection
+
+num_classes: 4
+remap_mscoco_category: False
+
+train_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: /root/autodl-tmp/data/rfdetr_urpc/train
+    ann_file: /root/autodl-tmp/data/rfdetr_urpc/train/_annotations.coco.json
+    transforms:
+      type: Compose
+      ops: ~
+  shuffle: True
+  batch_size: 16
+  num_workers: 8
+  drop_last: True
+
+val_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: /root/autodl-tmp/data/rfdetr_urpc/valid
+    ann_file: /root/autodl-tmp/data/rfdetr_urpc/valid/_annotations.coco.json
+    transforms:
+      type: Compose
+      ops: ~
+  shuffle: False
+  batch_size: 16
+  num_workers: 8
+  drop_last: False

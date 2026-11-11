@@ -1,0 +1,48 @@
+__include__: [
+  '../dataset/urpc_detection.yml',
+  '../runtime.yml',
+  './include/dataloader.yml',
+  './include/optimizer.yml',
+  './include/rtdetr_r50vd.yml',
+]
+
+output_dir: /root/autodl-tmp/work_dirs/rtdetr_r50vd_urpc_416_nozoom
+
+PResNet:
+  pretrained: False
+
+RTDETR:
+  multi_scale: [416]
+
+HybridEncoder:
+  eval_spatial_size: [416, 416]
+
+RTDETRTransformer:
+  eval_spatial_size: [416, 416]
+
+train_dataloader:
+  batch_size: 16
+  dataset:
+    transforms:
+      ops:
+        - {type: RandomPhotometricDistort, p: 0.5}
+        - {type: SanitizeBoundingBox, min_size: 1}
+        - {type: RandomHorizontalFlip}
+        - {type: Resize, size: [416, 416], }
+        - {type: ToImageTensor}
+        - {type: ConvertDtype}
+        - {type: SanitizeBoundingBox, min_size: 1}
+        - {type: ConvertBox, out_fmt: 'cxcywh', normalize: True}
+  collate_fn: default_collate_fn
+
+val_dataloader:
+  batch_size: 16
+  dataset:
+    transforms:
+      ops:
+        - {type: Resize, size: [416, 416]}
+        - {type: ToImageTensor}
+        - {type: ConvertDtype}
+  collate_fn: default_collate_fn
+
+checkpoint_step: 30

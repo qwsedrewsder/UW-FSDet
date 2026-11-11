@@ -1,0 +1,73 @@
+# D95 = D94 initialization variant: ImageNet-1k backbone pretraining only; randomly initialize PPM, neck, and head
+#
+# Purpose: test whether E2 weights learned at 416x416 constrain the large-object distribution.
+# The only difference from D94: do not load E2 weights (no pretrained_ckpt).
+# The backbone still loads ImageNet-1k pretrained weights through timm (pretrained: true).
+# Keep the D94 training schedule: 36 epochs, decay [24,32], stages [4,20], warmup 500.
+# This isolates initialization as the only difference between D94 and D95.
+_base_: _base_.yaml
+
+model:
+  name: d95_e2_ppm_fresh36
+  backbone: {name: mobilevit, variant: xs, pretrained: true}
+  neck:
+    name: pan
+    out_channels: 256
+    pan_depth: 3
+  head:
+    name: yolo
+  ppm:
+    to_rgb: true
+    residual: true
+    residual_scale: 0.5
+    up_out: true
+    detach_stage0: true
+    uie_mid: 16
+    sr_mid: 16
+    uie_tv_w: 0.1
+    uie_perc_w: 0.02
+    sr_mse_w: 1.0
+    use_perc: true
+  levels: [8, 16, 32]
+  num_classes: 4
+
+data:
+  root: /root/autodl-tmp/data/urpc_coco
+  ann_train: /root/autodl-tmp/data/annotations/train_clean.json
+  ann_test: /root/autodl-tmp/data/annotations/test_clean.json
+  img_train: /root/autodl-tmp/data/urpc_coco/train2018/image
+  img_test: /root/autodl-tmp/data/urpc_coco/test2018/image
+  num_classes: 4
+  input_size: [416, 416]   # PPM input: 416x416; 2x upsampling gives detector input: 832x832
+  normalize_mean: [0.0, 0.0, 0.0]
+  normalize_std: [1.0, 1.0, 1.0]
+
+optimizer:
+  type: SGD
+  lr: 0.05
+  momentum: 0.9
+  weight_decay: 0.0001
+  backbone_lr_factor: 0.5
+
+schedule:
+  epochs: 36
+  lr_decay: [24, 32]
+  lr_decay_factor: 0.1
+  warmup_iters: 500
+  warmup_ratio: 0.00066667
+
+train:
+  batch_size: 8
+  num_workers: 12
+  grad_clip: 35
+  amp: bf16
+  log_interval: 50
+  seed: 0
+  ppm_stages: [4, 20]
+  eval_from_epoch: 1
+
+postprocess:
+  nms_pre: 1000
+  score_thr: 0.05
+  nms_iou: 0.5
+  max_per_img: 100

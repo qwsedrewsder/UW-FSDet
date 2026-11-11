@@ -1,0 +1,17 @@
+# S4-B P3: experiment matrix
+# Group A: validate FG-FPN top-down fusion (M2)
+# Group B: independently diagnose M1 (APl -7.2 / AP75 -6.0)
+# Criterion: A1 > 32.4 (M1 H-A) indicates an FG-FPN fix; group B targets APl above 45.
+
+# ===== Group A =====
+- {exp: s4b_A1_m2_topdown_ha, seed: 0, config: configs/m2_mvit_fgfpn.yaml}
+- {exp: s4b_A2_m2_topdown_hc, seed: 0, config: configs/m2_mvit_fgfpn.yaml, model.levels: "[2,4,8,16,32]"}
+
+# ===== Group B =====
+- {exp: s4b_B1_m1_bb_lr01, seed: 0, config: configs/m1_mvit_fpn.yaml, optimizer.backbone_lr_factor: 0.1}
+- {exp: s4b_B2_m1_bb_frozen, seed: 0, config: configs/m1_mvit_fpn.yaml, optimizer.backbone_lr_factor: 0.0}
+- {exp: s4b_B3_m1_normeval, seed: 0, config: configs/m1_mvit_fpn.yaml, train.norm_eval: true}
+- {exp: s4b_B4_m1_p6, seed: 0, config: configs/m1_mvit_fpn.yaml, model.levels: "[4,8,16,32,64]"}
+- {exp: s4b_B5_m1_outconv, seed: 0, config: configs/m1_mvit_fpn.yaml, model.neck.out_conv: true}
+- {exp: s4b_B6_m1_36ep, seed: 0, config: configs/m1_mvit_fpn.yaml, schedule.epochs: 36, schedule.lr_decay: "[24,33]"}
+- {exp: s4b_B7_m1_448, seed: 0, config: configs/m1_mvit_fpn.yaml, data.input_size: "[448,448]"}

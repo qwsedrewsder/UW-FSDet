@@ -1,0 +1,10 @@
+# S5: M2 (MobileViT + FG-FPN), three seeds and ablations
+# cls_pi=0.1: same rationale as m1_s4; an adjustment made during reproduction
+- {exp: m2_s5_s0, seed: 0, model.neck.cls_pi: 0.1}
+- {exp: m2_s5_s1, seed: 1, model.neck.cls_pi: 0.1}
+- {exp: m2_s5_s2, seed: 2, model.neck.cls_pi: 0.1}
+- {exp: m2_fuseconv_pairwise, seed: 0, model.neck.cls_pi: 0.1, model.neck.fuse_conv: pairwise}
+- {exp: m2_fuseconv_persource, seed: 0, model.neck.cls_pi: 0.1, model.neck.fuse_conv: per_source}
+- {exp: m2_nop1, seed: 0, model.neck.cls_pi: 0.1, model.neck.remove_p1: true}
+- {exp: m2_hb_levels, seed: 0, model.neck.cls_pi: 0.1, model.levels: "[8,16,32,64,128]"}
+- {exp: m2_hc_levels, seed: 0, model.neck.cls_pi: 0.1, model.levels: "[2,4,8,16,32]"}

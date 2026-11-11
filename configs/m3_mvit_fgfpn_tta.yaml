@@ -1,0 +1,10 @@
+_base_: m2_mvit_fgfpn.yaml
+
+model:
+  name: m3_mvit_fgfpn_tta
+
+test:
+  tta:
+    enabled: true
+    scales: [320, 416]    # long side
+    flip: true

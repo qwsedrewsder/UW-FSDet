@@ -1,0 +1,53 @@
+_base_: _base_.yaml
+
+model:
+  name: d1_r2_snrmimic
+  backbone: {name: mobilevit, variant: xs, pretrained: true}
+  neck:
+    name: fpn
+    out_conv: false
+    snr_mimic: true
+    mimic_lambda: 0.5
+    mimic_warmup_epochs: 2
+    mimic_ramp_epochs: 2
+  levels: [4, 8, 16, 32]
+  num_classes: 4
+
+data:
+  root: /root/autodl-tmp/data/urpc_coco
+  ann_train: /root/autodl-tmp/data/annotations/train_clean_tagged.json
+  ann_test: /root/autodl-tmp/data/annotations/test_clean.json
+  img_train: /root/autodl-tmp/data/urpc_coco/train2018/image
+  img_test: /root/autodl-tmp/data/urpc_coco/test2018/image
+  num_classes: 4
+  input_size: [416, 416]
+  normalize_mean: [0.0, 0.0, 0.0]
+  normalize_std: [1.0, 1.0, 1.0]
+
+optimizer:
+  type: SGD
+  lr: 0.05
+  momentum: 0.9
+  weight_decay: 0.0001
+  backbone_lr_factor: 0.5
+
+schedule:
+  epochs: 24
+  lr_decay: [16, 22]
+  lr_decay_factor: 0.1
+  warmup_iters: 2500
+  warmup_ratio: 0.00066667
+
+train:
+  batch_size: 8
+  num_workers: 12
+  grad_clip: 35
+  amp: bf16
+  log_interval: 50
+  seed: 0
+
+postprocess:
+  nms_pre: 1000
+  score_thr: 0.05
+  nms_iou: 0.5
+  max_per_img: 100

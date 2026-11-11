@@ -1,0 +1,13 @@
+_base_: _base_.yaml
+
+model:
+  name: m1_mvit_fpn
+  backbone: {name: mobilevit, variant: xs, pretrained: true}
+  neck: {name: fpn}
+  levels: [4, 8, 16, 32]   # H-A default: L2..L5
+  num_classes: 4
+
+# S4-C: make warmup explicit. The paper specifies an absolute 2500 iterations; proportional scaling gives about 625 at batch size 8.
+# Retaining 2500 from _base_ is also possible; override schedule.warmup_iters with --set during sweeps.
+schedule:
+  warmup_iters: 625

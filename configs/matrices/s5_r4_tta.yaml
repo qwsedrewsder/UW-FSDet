@@ -1,0 +1,8 @@
+# S5 R4: TTA using the final R3 weights; inference only
+# Paper recipe: long sides 320 and 416 with flips, giving four views; extend the sweep to additional scale combinations
+- {exp: s5_r4_tta_416, seed: 0, config: /root/autodl-tmp/work_dirs/s5_r3/config.yaml, ckpt: /root/autodl-tmp/work_dirs/s5_r3/ckpt/final.pth, skip_train: true, tta: true, tta_scales: "416", tta_flip: false}
+- {exp: s5_r4_tta_416f, seed: 0, config: /root/autodl-tmp/work_dirs/s5_r3/config.yaml, ckpt: /root/autodl-tmp/work_dirs/s5_r3/ckpt/final.pth, skip_train: true, tta: true, tta_scales: "416", tta_flip: true}
+- {exp: s5_r4_tta_320_416, seed: 0, config: /root/autodl-tmp/work_dirs/s5_r3/config.yaml, ckpt: /root/autodl-tmp/work_dirs/s5_r3/ckpt/final.pth, skip_train: true, tta: true, tta_scales: "320,416", tta_flip: false}
+- {exp: s5_r4_tta_320_416f, seed: 0, config: /root/autodl-tmp/work_dirs/s5_r3/config.yaml, ckpt: /root/autodl-tmp/work_dirs/s5_r3/ckpt/final.pth, skip_train: true, tta: true, tta_scales: "320,416", tta_flip: true}
+- {exp: s5_r4_tta_416_512, seed: 0, config: /root/autodl-tmp/work_dirs/s5_r3/config.yaml, ckpt: /root/autodl-tmp/work_dirs/s5_r3/ckpt/final.pth, skip_train: true, tta: true, tta_scales: "416,512", tta_flip: true}
+- {exp: s5_r4_tta_320_416_512, seed: 0, config: /root/autodl-tmp/work_dirs/s5_r3/config.yaml, ckpt: /root/autodl-tmp/work_dirs/s5_r3/ckpt/final.pth, skip_train: true, tta: true, tta_scales: "320,416,512", tta_flip: true}

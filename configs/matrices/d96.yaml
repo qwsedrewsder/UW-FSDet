@@ -1,0 +1,2 @@
+# D96: extend D94 to 48 epochs to increase the large-object adaptation budget
+- {exp: d96_e2_ppm_48ep, seed: 0, config: configs/d96_e2_ppm_48ep.yaml}

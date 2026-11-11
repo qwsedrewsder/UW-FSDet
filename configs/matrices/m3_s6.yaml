@@ -1,0 +1,9 @@
+# S6: M3 TTA inference using m2_s5_s0 weights; no training
+# Point config to the M2 training config.yaml, including normalization and postprocessing settings.
+# Scale ablations: {416} / {320,416} / {320,416,512}, with and without flips
+- {exp: m3_tta_416, seed: 0, skip_train: true, config: /root/autodl-tmp/work_dirs/m2_s5_s0/config.yaml, ckpt: /root/autodl-tmp/work_dirs/m2_s5_s0/ckpt/final.pth, tta: true, tta_scales: "416", tta_flip: false}
+- {exp: m3_tta_416_flip, seed: 0, skip_train: true, config: /root/autodl-tmp/work_dirs/m2_s5_s0/config.yaml, ckpt: /root/autodl-tmp/work_dirs/m2_s5_s0/ckpt/final.pth, tta: true, tta_scales: "416", tta_flip: true}
+- {exp: m3_tta_320_416, seed: 0, skip_train: true, config: /root/autodl-tmp/work_dirs/m2_s5_s0/config.yaml, ckpt: /root/autodl-tmp/work_dirs/m2_s5_s0/ckpt/final.pth, tta: true, tta_scales: "320,416", tta_flip: false}
+- {exp: m3_tta_320_416_flip, seed: 0, skip_train: true, config: /root/autodl-tmp/work_dirs/m2_s5_s0/config.yaml, ckpt: /root/autodl-tmp/work_dirs/m2_s5_s0/ckpt/final.pth, tta: true, tta_scales: "320,416", tta_flip: true}
+- {exp: m3_tta_320_416_512, seed: 0, skip_train: true, config: /root/autodl-tmp/work_dirs/m2_s5_s0/config.yaml, ckpt: /root/autodl-tmp/work_dirs/m2_s5_s0/ckpt/final.pth, tta: true, tta_scales: "320,416,512", tta_flip: false}
+- {exp: m3_tta_320_416_512_flip, seed: 0, skip_train: true, config: /root/autodl-tmp/work_dirs/m2_s5_s0/config.yaml, ckpt: /root/autodl-tmp/work_dirs/m2_s5_s0/ckpt/final.pth, tta: true, tta_scales: "320,416,512", tta_flip: true}

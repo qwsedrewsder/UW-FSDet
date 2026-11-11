@@ -1,0 +1,76 @@
+# D9v2 = R2 + PPM (option 2: 36-epoch three-stage training with R2 initialization)
+#
+# Architecture: residual PPM, x_pm = x + proj(concat(UIE, SR)); zero-initialize proj for an initial identity mapping
+#               -> MobileViT-XS -> standard FPN -> RetinaNet head
+#
+# Training: use the three stages in Algorithm 1 with a 36-epoch budget:
+#   Stage 1 (0-4 epochs):    train PPM only; warmup 500 reaches the target learning rate within 4 epochs
+#   Stage 2 (4-20 epochs):   train the detector only for 16 full-learning-rate epochs, fine-tuning R2 weights
+#   Stage 3 (20-36 epochs):  joint training
+#   Learning-rate decay at [24, 32], shifted proportionally for 36 epochs to preserve learning rates in stages 2/3
+#
+# Deviations from C1/D1 that must be documented:
+#   1. Extend training from 24 to 36 epochs; project experiments observed a 2.8 AP gain.
+#   2. Initialize the detector from R2 weights rather than training from scratch.
+#   3. Reduce warmup from 2500 to 500 iterations and postpone learning-rate decay.
+#   4. Use a residual PPM rather than direct concatenation output to preserve the pretrained stem input distribution.
+_base_: _base_.yaml
+
+model:
+  name: d9v2_r2_ppm
+  backbone: {name: mobilevit, variant: xs, pretrained: true}
+  neck:
+    name: fpn
+    out_conv: false
+  ppm:
+    to_rgb: true
+    residual: true
+    uie_mid: 16
+    sr_mid: 16
+    uie_tv_w: 0.1
+    uie_perc_w: 0.02
+    sr_mse_w: 1.0
+    use_perc: true
+  pretrained_ckpt: /root/autodl-tmp/work_dirs/s5_S1_07b/ckpt/final.pth
+  levels: [4, 8, 16, 32]
+  num_classes: 4
+
+data:
+  root: /root/autodl-tmp/data/urpc_coco
+  ann_train: /root/autodl-tmp/data/annotations/train_clean.json
+  ann_test: /root/autodl-tmp/data/annotations/test_clean.json
+  img_train: /root/autodl-tmp/data/urpc_coco/train2018/image
+  img_test: /root/autodl-tmp/data/urpc_coco/test2018/image
+  num_classes: 4
+  input_size: [416, 416]
+  normalize_mean: [0.0, 0.0, 0.0]
+  normalize_std: [1.0, 1.0, 1.0]
+
+optimizer:
+  type: SGD
+  lr: 0.05
+  momentum: 0.9
+  weight_decay: 0.0001
+  backbone_lr_factor: 0.5
+
+schedule:
+  epochs: 36
+  lr_decay: [24, 32]
+  lr_decay_factor: 0.1
+  warmup_iters: 500
+  warmup_ratio: 0.00066667
+
+train:
+  batch_size: 8
+  num_workers: 12
+  grad_clip: 35
+  amp: bf16
+  log_interval: 50
+  seed: 0
+  ppm_stages: [4, 20]
+
+postprocess:
+  nms_pre: 1000
+  score_thr: 0.05
+  nms_iou: 0.5
+  max_per_img: 100

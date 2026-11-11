@@ -1,0 +1,10 @@
+# S5 Stage 1: all eight warmup and learning-rate combinations; M1, 24 epochs, seed 0, input size 416
+# Rerun all combinations; discard the earlier s4c_C* results.
+- {exp: s5_S1_01, seed: 0, config: configs/m1_mvit_fpn.yaml, schedule.warmup_iters: 625, optimizer.lr: 0.01}
+- {exp: s5_S1_02, seed: 0, config: configs/m1_mvit_fpn.yaml, schedule.warmup_iters: 625, optimizer.lr: 0.02}
+- {exp: s5_S1_03, seed: 0, config: configs/m1_mvit_fpn.yaml, schedule.warmup_iters: 625, optimizer.lr: 0.05}
+- {exp: s5_S1_04, seed: 0, config: configs/m1_mvit_fpn.yaml, schedule.warmup_iters: 625, optimizer.lr: 0.1}
+- {exp: s5_S1_05, seed: 0, config: configs/m1_mvit_fpn.yaml, schedule.warmup_iters: 500, optimizer.lr: 0.02}
+- {exp: s5_S1_06, seed: 0, config: configs/m1_mvit_fpn.yaml, schedule.warmup_iters: 1250, optimizer.lr: 0.02}
+- {exp: s5_S1_07, seed: 0, config: configs/m1_mvit_fpn.yaml, schedule.warmup_iters: 2500, optimizer.lr: 0.05}
+- {exp: s5_S1_08, seed: 0, config: configs/m1_mvit_fpn.yaml, schedule.warmup_iters: 500, optimizer.lr: 0.05}

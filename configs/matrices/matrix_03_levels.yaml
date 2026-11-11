@@ -1,0 +1,13 @@
+# S4-A Step 3: M1/M2 experiment matrix targeting the reported paper results
+# L1  M1 + H-C(2,4,8,16,32)                      literal hierarchy specified in the paper
+# L3  M2 + H-C + delta=1/(n-i)                   likely configuration for matching the paper
+# L5  M2 + H-C + delta=1.0                      unchanged control to isolate hierarchy effects
+# L6  M1 + H-C + octave_base_scale=2            control for smaller ground-truth objects
+# L7  M2 + H-C + delta=1/(n-i) + remove_p1       test the main claim in the paper
+# L2 = m1_s4 already used H-A; L4 = m2_s5 already used H-A with delta=1.0.
+
+- {exp: s4a_L1_m1_hc, seed: 0, config: configs/m1_mvit_fpn.yaml, model.levels: "[2,4,8,16,32]"}
+- {exp: s4a_L3_m2_hc_delta, seed: 0, config: configs/m2_mvit_fgfpn.yaml, model.levels: "[2,4,8,16,32]"}
+- {exp: s4a_L5_m2_hc_delta1, seed: 0, config: configs/m2_mvit_fgfpn.yaml, model.levels: "[2,4,8,16,32]", model.neck.delta_init_ones: true}
+- {exp: s4a_L6_m1_hc_scale2, seed: 0, config: configs/m1_mvit_fpn.yaml, model.levels: "[2,4,8,16,32]", model.neck.octave_base_scale: 2}
+- {exp: s4a_L7_m2_hc_nop1, seed: 0, config: configs/m2_mvit_fgfpn.yaml, model.levels: "[2,4,8,16,32]", model.neck.remove_p1: true}

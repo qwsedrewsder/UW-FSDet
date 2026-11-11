@@ -1,0 +1,5 @@
+# S3: M0 baseline (RetinaNet-R50-FPN) × 3 seed
+# cls_pi=0.1: same rationale as m1_s4; an adjustment made during reproduction
+- {exp: m0_s3_s0, seed: 0, model.neck.cls_pi: 0.1}
+- {exp: m0_s3_s1, seed: 1, model.neck.cls_pi: 0.1}
+- {exp: m0_s3_s2, seed: 2, model.neck.cls_pi: 0.1}

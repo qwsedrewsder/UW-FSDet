@@ -1,0 +1,57 @@
+_base_: _base_.yaml
+
+model:
+  name: c1_r3_lge
+  backbone: {name: mobilevit, variant: xs, pretrained: true}
+  neck:
+    name: fgfpn
+    fuse_conv: pairwise_cross
+    out_conv: false
+    lge: true
+    lge_k: 2
+    lge_s: 1
+    lge_kernel_size: 7
+    lge_strides: [4, 8]
+  levels: [4, 8, 16, 32]
+  num_classes: 4
+
+data:
+  root: /root/autodl-tmp/data/urpc_coco
+  ann_train: /root/autodl-tmp/data/annotations/train_clean.json
+  ann_test: /root/autodl-tmp/data/annotations/test_clean.json
+  img_train: /root/autodl-tmp/data/urpc_coco/train2018/image
+  img_test: /root/autodl-tmp/data/urpc_coco/test2018/image
+  num_classes: 4
+  input_size: [640, 640]
+  normalize_mean: [0.0, 0.0, 0.0]
+  normalize_std: [1.0, 1.0, 1.0]
+
+optimizer:
+  type: AdamW
+  lr: 0.0002
+  weight_decay: 0.05
+  backbone_lr_factor: 0.1
+  no_decay_on: [norm, bias]
+
+schedule:
+  type: cosine
+  epochs: 100
+  warmup_epochs: 3
+  warmup_ratio: 0.0
+
+train:
+  batch_size: 8
+  num_workers: 12
+  grad_clip: 35
+  amp: bf16
+  log_interval: 50
+  seed: 0
+  ema: 0.9998
+  multi_scale: [480, 544, 608, 672, 736]
+  color_jitter: true
+
+postprocess:
+  nms_pre: 1000
+  score_thr: 0.001
+  nms_iou: 0.6
+  max_per_img: 300

@@ -1,0 +1,10 @@
+# Final experiment matrix: best configuration, warmup 625, learning rate 0.02, 24 epochs
+# S4-C results: C2 (warmup 625, lr 0.02) was best at AP=35.5; lr=0.1 (C4) and lr=0.05 (C3) diverged.
+# M1 = MobileViT + FPN；M2 = MobileViT + FG-FPN(topdown, pairwise_cross)
+
+- {exp: final_m1_s0, seed: 0, config: configs/m1_mvit_fpn.yaml, optimizer.lr: 0.02}
+- {exp: final_m1_s1, seed: 1, config: configs/m1_mvit_fpn.yaml, optimizer.lr: 0.02}
+- {exp: final_m1_s2, seed: 2, config: configs/m1_mvit_fpn.yaml, optimizer.lr: 0.02}
+- {exp: final_m2_s0, seed: 0, config: configs/m2_mvit_fgfpn.yaml, optimizer.lr: 0.02}
+- {exp: final_m2_s1, seed: 1, config: configs/m2_mvit_fgfpn.yaml, optimizer.lr: 0.02}
+- {exp: final_m2_s2, seed: 2, config: configs/m2_mvit_fgfpn.yaml, optimizer.lr: 0.02}

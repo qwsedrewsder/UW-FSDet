@@ -1,0 +1,80 @@
+_config_hash: 0e65f9f13705
+data:
+  ann_test: /root/autodl-tmp/data/annotations/test_clean.json
+  ann_train: /root/autodl-tmp/data/annotations/train_clean.json
+  img_test: /root/autodl-tmp/data/urpc_coco/test2018/image
+  img_train: /root/autodl-tmp/data/urpc_coco/train2018/image
+  input_size:
+  - 416
+  - 416
+  normalize_mean:
+  - 0.0
+  - 0.0
+  - 0.0
+  normalize_std:
+  - 1.0
+  - 1.0
+  - 1.0
+  num_classes: 4
+  root: /root/autodl-tmp/data/urpc_coco
+model:
+  backbone:
+    name: mobilevit
+    pretrained: true
+    variant: xs
+  head:
+    name: yolo
+  levels:
+  - 8
+  - 16
+  - 32
+  name: d94_e2_ppm_36ep
+  neck:
+    name: pan
+    out_channels: 256
+    pan_depth: 3
+  num_classes: 4
+  ppm:
+    detach_stage0: true
+    residual: true
+    residual_scale: 0.5
+    sr_mid: 16
+    sr_mse_w: 1.0
+    to_rgb: true
+    uie_mid: 16
+    uie_perc_w: 0.02
+    uie_tv_w: 0.1
+    up_out: true
+    use_perc: true
+  pretrained_ckpt: /root/autodl-tmp/work_dirs/e2_mvit_pan_yolo_seed0/ckpt/final.pth
+optimizer:
+  backbone_lr_factor: 0.5
+  lr: 0.05
+  momentum: 0.9
+  type: SGD
+  weight_decay: 0.0001
+postprocess:
+  max_per_img: 100
+  nms_iou: 0.5
+  nms_pre: 1000
+  score_thr: 0.05
+schedule:
+  epochs: 36
+  lr_decay:
+  - 24
+  - 32
+  lr_decay_factor: 0.1
+  warmup_iters: 500
+  warmup_ratio: 0.00066667
+train:
+  amp: bf16
+  batch_size: 8
+  eval_from_epoch: 1
+  grad_clip: 35
+  log_interval: 50
+  num_workers: 12
+  ppm_stages:
+  - 4
+  - 20
+  seed: 0
+work_dir: /root/autodl-tmp/work_dirs

@@ -1,0 +1,7 @@
+# S4: M1 (MobileViT + FPN), three seeds and a from-scratch ablation
+# cls_pi=0.1: the paper default of 0.01 becomes trapped in an all-background local optimum for small URPC objects (stuck bias).
+# Starting at 0.1 helps positive samples learn; at epoch 8, cls_max was 0.4 versus 0.02. Record this reproduction adjustment.
+- {exp: m1_s4_s0, seed: 0, model.neck.cls_pi: 0.1}
+- {exp: m1_s4_s1, seed: 1, model.neck.cls_pi: 0.1}
+- {exp: m1_s4_s2, seed: 2, model.neck.cls_pi: 0.1}
+- {exp: m1_fromscratch, seed: 0, model.neck.cls_pi: 0.1, model.backbone.pretrained: false}

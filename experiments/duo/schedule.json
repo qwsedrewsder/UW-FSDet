@@ -1,0 +1,274 @@
+{
+  "jobs": [
+    {
+      "name": "e2_seed0",
+      "kind": "htdet",
+      "model": "e2",
+      "seed": 0
+    },
+    {
+      "name": "uwfsdet_seed0",
+      "kind": "htdet",
+      "seed": 0,
+      "model": "uwfsdet"
+    },
+    {
+      "name": "baseline_seed0",
+      "kind": "htdet",
+      "seed": 0,
+      "model": "baseline"
+    },
+    {
+      "name": "retinanet_seed0",
+      "kind": "htdet",
+      "seed": 0,
+      "model": "retinanet"
+    },
+    {
+      "name": "yolov12n_seed0",
+      "kind": "yolov12",
+      "seed": 0,
+      "model": "n"
+    },
+    {
+      "name": "yolov12s_seed0",
+      "kind": "yolov12",
+      "seed": 0,
+      "model": "s"
+    },
+    {
+      "name": "yolov12m_seed0",
+      "kind": "yolov12",
+      "seed": 0,
+      "model": "m"
+    },
+    {
+      "name": "yolov12l_seed0",
+      "kind": "yolov12",
+      "seed": 0,
+      "model": "l"
+    },
+    {
+      "name": "hyuod_seed0",
+      "kind": "script",
+      "seed": 0,
+      "script": "run_hyuod_duo.py"
+    },
+    {
+      "name": "yolox_tiny_seed0",
+      "kind": "script",
+      "seed": 0,
+      "script": "run_yolox_duo.py"
+    },
+    {
+      "name": "dfine_seed0",
+      "kind": "script",
+      "seed": 0,
+      "script": "run_dfine_duo.py"
+    },
+    {
+      "name": "dino_seed0",
+      "kind": "script",
+      "seed": 0,
+      "script": "run_dino_duo.py"
+    },
+    {
+      "name": "rtdetr_seed0",
+      "kind": "script",
+      "seed": 0,
+      "script": "run_rtdetr_duo.py"
+    },
+    {
+      "name": "eamsf_seed0",
+      "kind": "script",
+      "seed": 0,
+      "script": "run_eamsf_duo.py"
+    },
+    {
+      "name": "deco_seed0",
+      "kind": "script",
+      "seed": 0,
+      "script": "run_deco_duo.py"
+    },
+    {
+      "name": "e2_seed1",
+      "kind": "htdet",
+      "model": "e2",
+      "seed": 1
+    },
+    {
+      "name": "uwfsdet_seed1",
+      "kind": "htdet",
+      "seed": 1,
+      "model": "uwfsdet"
+    },
+    {
+      "name": "baseline_seed1",
+      "kind": "htdet",
+      "seed": 1,
+      "model": "baseline"
+    },
+    {
+      "name": "retinanet_seed1",
+      "kind": "htdet",
+      "seed": 1,
+      "model": "retinanet"
+    },
+    {
+      "name": "yolov12n_seed1",
+      "kind": "yolov12",
+      "seed": 1,
+      "model": "n"
+    },
+    {
+      "name": "yolov12s_seed1",
+      "kind": "yolov12",
+      "seed": 1,
+      "model": "s"
+    },
+    {
+      "name": "yolov12m_seed1",
+      "kind": "yolov12",
+      "seed": 1,
+      "model": "m"
+    },
+    {
+      "name": "yolov12l_seed1",
+      "kind": "yolov12",
+      "seed": 1,
+      "model": "l"
+    },
+    {
+      "name": "hyuod_seed1",
+      "kind": "script",
+      "seed": 1,
+      "script": "run_hyuod_duo.py"
+    },
+    {
+      "name": "yolox_tiny_seed1",
+      "kind": "script",
+      "seed": 1,
+      "script": "run_yolox_duo.py"
+    },
+    {
+      "name": "dfine_seed1",
+      "kind": "script",
+      "seed": 1,
+      "script": "run_dfine_duo.py"
+    },
+    {
+      "name": "dino_seed1",
+      "kind": "script",
+      "seed": 1,
+      "script": "run_dino_duo.py"
+    },
+    {
+      "name": "rtdetr_seed1",
+      "kind": "script",
+      "seed": 1,
+      "script": "run_rtdetr_duo.py"
+    },
+    {
+      "name": "eamsf_seed1",
+      "kind": "script",
+      "seed": 1,
+      "script": "run_eamsf_duo.py"
+    },
+    {
+      "name": "deco_seed1",
+      "kind": "script",
+      "seed": 1,
+      "script": "run_deco_duo.py"
+    },
+    {
+      "name": "e2_seed2",
+      "kind": "htdet",
+      "model": "e2",
+      "seed": 2
+    },
+    {
+      "name": "uwfsdet_seed2",
+      "kind": "htdet",
+      "seed": 2,
+      "model": "uwfsdet"
+    },
+    {
+      "name": "baseline_seed2",
+      "kind": "htdet",
+      "seed": 2,
+      "model": "baseline"
+    },
+    {
+      "name": "retinanet_seed2",
+      "kind": "htdet",
+      "seed": 2,
+      "model": "retinanet"
+    },
+    {
+      "name": "yolov12n_seed2",
+      "kind": "yolov12",
+      "seed": 2,
+      "model": "n"
+    },
+    {
+      "name": "yolov12s_seed2",
+      "kind": "yolov12",
+      "seed": 2,
+      "model": "s"
+    },
+    {
+      "name": "yolov12m_seed2",
+      "kind": "yolov12",
+      "seed": 2,
+      "model": "m"
+    },
+    {
+      "name": "yolov12l_seed2",
+      "kind": "yolov12",
+      "seed": 2,
+      "model": "l"
+    },
+    {
+      "name": "hyuod_seed2",
+      "kind": "script",
+      "seed": 2,
+      "script": "run_hyuod_duo.py"
+    },
+    {
+      "name": "yolox_tiny_seed2",
+      "kind": "script",
+      "seed": 2,
+      "script": "run_yolox_duo.py"
+    },
+    {
+      "name": "dfine_seed2",
+      "kind": "script",
+      "seed": 2,
+      "script": "run_dfine_duo.py"
+    },
+    {
+      "name": "dino_seed2",
+      "kind": "script",
+      "seed": 2,
+      "script": "run_dino_duo.py"
+    },
+    {
+      "name": "rtdetr_seed2",
+      "kind": "script",
+      "seed": 2,
+      "script": "run_rtdetr_duo.py"
+    },
+    {
+      "name": "eamsf_seed2",
+      "kind": "script",
+      "seed": 2,
+      "script": "run_eamsf_duo.py"
+    },
+    {
+      "name": "deco_seed2",
+      "kind": "script",
+      "seed": 2,
+      "script": "run_deco_duo.py"
+    }
+  ]
+}

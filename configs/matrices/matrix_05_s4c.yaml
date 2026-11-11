@@ -1,0 +1,11 @@
+# S4-C P1: joint warmup and learning-rate sweep; 24 epochs, M1 architecture, seed 0
+# The paper uses an absolute warmup of 2500 iterations; scaling to batch size 8 gives about 625, assuming the original batch size was 2.
+# C4 uses the paper learning rate of 0.1 for the first effective validation.
+
+- {exp: s4c_C1_w625_lr001, seed: 0, config: configs/m1_mvit_fpn.yaml, schedule.warmup_iters: 625, optimizer.lr: 0.01}
+- {exp: s4c_C2_w625_lr002, seed: 0, config: configs/m1_mvit_fpn.yaml, schedule.warmup_iters: 625, optimizer.lr: 0.02}
+- {exp: s4c_C3_w625_lr005, seed: 0, config: configs/m1_mvit_fpn.yaml, schedule.warmup_iters: 625, optimizer.lr: 0.05}
+- {exp: s4c_C4_w625_lr01, seed: 0, config: configs/m1_mvit_fpn.yaml, schedule.warmup_iters: 625, optimizer.lr: 0.1}
+- {exp: s4c_C5_w1250_lr002, seed: 0, config: configs/m1_mvit_fpn.yaml, schedule.warmup_iters: 1250, optimizer.lr: 0.02}
+- {exp: s4c_C6_w500_lr002, seed: 0, config: configs/m1_mvit_fpn.yaml, schedule.warmup_iters: 500, optimizer.lr: 0.02}
+- {exp: s4c_C7_w2500_lr005, seed: 0, config: configs/m1_mvit_fpn.yaml, schedule.warmup_iters: 2500, optimizer.lr: 0.05}

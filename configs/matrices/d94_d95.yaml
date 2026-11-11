@@ -1,0 +1,5 @@
+# D94/D95: compare two hypotheses about large-object adaptation at 832x832
+#   d94: E2 initialization + 36 epochs -> test insufficient training time
+#   d95: backbone pretraining only, other modules from scratch + 36 epochs -> test the influence of E2 weights learned at 416x416
+- {exp: d94_e2_ppm_36ep, seed: 0, config: configs/d94_e2_ppm_36ep.yaml}
+- {exp: d95_e2_ppm_fresh36, seed: 0, config: configs/d95_e2_ppm_fresh36.yaml}
